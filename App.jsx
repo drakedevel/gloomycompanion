@@ -1,6 +1,6 @@
+import base58 from 'base-58';
 import React from 'react';
 import { hot } from 'react-hot-loader';
-import uuidv4 from 'uuid/v4';
 
 import MainUI from './MainUI';
 import { useFirebase } from './firebase';
@@ -20,7 +20,9 @@ class App extends React.Component {
 
   handleHashChange = () => {
     if (useFirebase && window.location.hash.length === 0) {
-      window.location.hash = `#${uuidv4()}`;
+      const randBits = new Uint8Array(8);
+      window.crypto.getRandomValues(randBits);
+      window.location.hash = `#${base58.encode(randBits)}`;
     }
     if (window.location.hash !== this.state.locationHash) {
       this.setState({ locationHash: window.location.hash });
