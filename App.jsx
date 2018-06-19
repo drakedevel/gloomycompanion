@@ -1,10 +1,20 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
-import uuidv4 from 'uuid/v4';
 
 import MainUI from './MainUI';
 import { useFirebase } from './firebase';
 import { StorageContext } from './storage';
+
+function encode(bytes) {
+  const chars = ['0', 'O', 'l', 'I'];
+  let result = '';
+  for (const b of bytes) {
+    for (let i = 0; i < 8; i += 2) {
+      result += chars[(b >> i) & 3]; /* eslint-disable-line */
+    }
+  }
+  return result;
+}
 
 class App extends React.Component {
   state = { locationHash: window.location.hash };
@@ -20,7 +30,9 @@ class App extends React.Component {
 
   handleHashChange = () => {
     if (useFirebase && window.location.hash.length === 0) {
-      window.location.hash = `#${uuidv4()}`;
+      const randBits = new Uint8Array(8);
+      window.crypto.getRandomValues(randBits);
+      window.location.hash = `#${encode(randBits)}`;
     }
     if (window.location.hash !== this.state.locationHash) {
       this.setState({ locationHash: window.location.hash });
