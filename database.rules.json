@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "games": {
+      "$uuid": {
+        ".read": "$uuid.matches(/^.+$/)",
+        ".write": "$uuid.matches(/^.+$/)",
+      }
+    }
+  }
+}

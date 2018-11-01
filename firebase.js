@@ -7,6 +7,10 @@ export const useFirebase = config.useFirebase;
 // Initialize Firebase
 function init() {
   if (useFirebase) {
+    if (config.useFirebaseHosting) {
+      // Already initialized by environment
+      return firebase;
+    }
     return firebase.initializeApp(config.firebase);
   }
   return null;

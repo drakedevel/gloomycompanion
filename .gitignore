@@ -1,5 +1,8 @@
+/.firebase
+/.firebaserc
 /dist
 /node_modules
+/public
 /config.local.js
 .*.swp
 .*.swo
