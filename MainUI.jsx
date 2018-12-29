@@ -150,7 +150,7 @@ export default withStorage(MainUI, {
     deserialize: value => (typeof value === 'boolean' ? value : true),
   },
   showBaseStats: {
-    path: 'mod_deck_hidden',
+    path: 'show_base_stats',
     deserialize: value => (typeof value === 'boolean' ? value : false),
   },
 });
