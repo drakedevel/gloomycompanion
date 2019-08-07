@@ -31,7 +31,7 @@ export default class LevelSelector extends React.Component {
       // We take the value mod 10, so that we can make the latest entered digit override
       // the field value
       let value = parseInt(event.target.value) % 10;
-      if (isNaN(value) || value < 0) {
+      if (Number.isNaN(value) || value < 0) {
         value = 0;
       } else if (value > MAX_LEVEL) {
         value = MAX_LEVEL;

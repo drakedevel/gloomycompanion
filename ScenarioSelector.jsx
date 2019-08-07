@@ -25,7 +25,7 @@ export default class ScenarioSelector extends React.Component {
       }
 
       let value = parseInt(event.target.value);
-      if (isNaN(value) || value < 0) {
+      if (Number.isNaN(value) || value < 0) {
         value = 0;
       } else if (value >= SCENARIO_DEFINITIONS.length) {
         value = SCENARIO_DEFINITIONS.length;
