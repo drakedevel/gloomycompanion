@@ -41,20 +41,20 @@ export default class LevelSelector extends React.Component {
       this.props.onChange(value);
     };
 
-    const handleFocus = (event) => event.target.select();
+    const handleFocus = event => event.target.select();
 
     return (
       <Wrapper className={selectionList}>
-      <Label>{this.props.text}</Label>
-      <input
-      name="scenario_level"
-      type="text"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value={this.state.textValue}
-      onChange={onChange}
-      onFocus={handleFocus}
-      />
+        <Label>{this.props.text}</Label>
+        <input
+          name="scenario_level"
+          type="text"
+          pattern="[0-9]*"
+          inputMode="numeric"
+          value={this.state.textValue}
+          onChange={onChange}
+          onFocus={handleFocus}
+        />
       </Wrapper>
     );
   }

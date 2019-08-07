@@ -11,7 +11,7 @@ export default class ScenarioList extends React.Component {
   state = { level: 1, scenario: 1 };
 
   getScenarioDecks() {
-    const { decks, special_rules: specialRules = [] } = SCENARIO_DEFINITIONS[this.state.scenario-1];
+    const { decks, special_rules: specialRules = [] } = SCENARIO_DEFINITIONS[this.state.scenario - 1];
     return decks.map(({ name }) => {
       let level = this.state.level;
       if ((specialRules.indexOf(SPECIAL_RULES.living_corpse_two_levels_extra) >= 0) && (name == SPECIAL_RULES.living_corpse_two_levels_extra.affected_deck)) {

@@ -34,21 +34,21 @@ export default class ScenarioSelector extends React.Component {
 
       this.props.onChange(value);
     };
-    
-    const handleFocus = (event) => event.target.select();
+
+    const handleFocus = event => event.target.select();
 
     return (
       <ul className={selectionList}>
-      <li>{this.props.text}</li>
-      <input
-      name="scenario_number"
-      type="text"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value={this.state.textValue}
-      onChange={onChange}
-      onFocus={handleFocus}
-      />
+        <li>{this.props.text}</li>
+        <input
+          name="scenario_number"
+          type="text"
+          pattern="[0-9]*"
+          inputMode="numeric"
+          value={this.state.textValue}
+          onChange={onChange}
+          onFocus={handleFocus}
+        />
       </ul>
     );
   }
