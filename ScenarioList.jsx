@@ -1,16 +1,17 @@
 import React from 'react';
 
 import LevelSelector from './LevelSelector';
+import ScenarioSelector from './ScenarioSelector';
 import { makeDeckSpec } from './cards';
 import { SCENARIO_DEFINITIONS, SPECIAL_RULES } from './scenarios';
 
 import { selectionList } from './style/SettingsPane.scss';
 
 export default class ScenarioList extends React.Component {
-  state = { level: 1, scenario: 0 };
+  state = { level: 1, scenario: 1 };
 
   getScenarioDecks() {
-    const { decks, special_rules: specialRules = [] } = SCENARIO_DEFINITIONS[this.state.scenario];
+    const { decks, special_rules: specialRules = [] } = SCENARIO_DEFINITIONS[this.state.scenario - 1];
     return decks.map(({ name }) => {
       let level = this.state.level;
       if ((specialRules.indexOf(SPECIAL_RULES.living_corpse_two_levels_extra) >= 0) && (name == SPECIAL_RULES.living_corpse_two_levels_extra.affected_deck)) {
@@ -24,10 +25,8 @@ export default class ScenarioList extends React.Component {
     this.setState({ level });
   }
 
-  handleScenarioChange = (event) => {
-    this.setState({
-      scenario: Math.min(event.target.value - 1, SCENARIO_DEFINITIONS.length - 1),
-    });
+  handleScenarioChange = (scenario) => {
+    this.setState({ scenario });
   }
 
   render() {
@@ -39,13 +38,9 @@ export default class ScenarioList extends React.Component {
           value={this.state.level}
           onChange={this.handleLevelChange}
         />
-        <li>Select scenario number</li>
-        <input
-          max={SCENARIO_DEFINITIONS.length.toString()}
-          min="1"
-          name="scenario_number"
-          type="number"
-          value={this.state.scenario + 1}
+        <ScenarioSelector
+          text="Select scenario number"
+          value={this.state.scenario}
           onChange={this.handleScenarioChange}
         />
       </ul>

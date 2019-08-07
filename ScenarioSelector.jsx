@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { SCENARIO_DEFINITIONS } from './scenarios';
+
 import { selectionList } from './style/SettingsPane.scss';
 
-const MAX_LEVEL = 7;
-
-export default class LevelSelector extends React.Component {
+export default class ScenarioSelector extends React.Component {
   static propTypes = {
-    inline: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -19,22 +18,17 @@ export default class LevelSelector extends React.Component {
   }
 
   render() {
-    const Wrapper = this.props.inline ? 'span' : 'ul';
-    const Label = this.props.inline ? 'label' : 'li';
-
     const onChange = (event) => {
       if (event.target.value == '') {
         this.setState({ textValue: event.target.value });
         return;
       }
 
-      // We take the value mod 10, so that we can make the latest entered digit override
-      // the field value
-      let value = parseInt(event.target.value) % 10;
+      let value = parseInt(event.target.value);
       if (Number.isNaN(value) || value < 0) {
         value = 0;
-      } else if (value > MAX_LEVEL) {
-        value = MAX_LEVEL;
+      } else if (value >= SCENARIO_DEFINITIONS.length) {
+        value = SCENARIO_DEFINITIONS.length;
       }
       this.setState({ textValue: value });
 
@@ -44,10 +38,10 @@ export default class LevelSelector extends React.Component {
     const handleFocus = event => event.target.select();
 
     return (
-      <Wrapper className={selectionList}>
-        <Label>{this.props.text}</Label>
+      <ul className={selectionList}>
+        <li>{this.props.text}</li>
         <input
-          name="scenario_level"
+          name="scenario_number"
           type="text"
           pattern="[0-9]*"
           inputMode="numeric"
@@ -55,7 +49,8 @@ export default class LevelSelector extends React.Component {
           onChange={onChange}
           onFocus={handleFocus}
         />
-      </Wrapper>
+      </ul>
     );
   }
 }
+
